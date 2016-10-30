@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["sonots"]
   spec.email         = ["sonots@gmail.com"]
 
-  spec.summary       = %q{Handle Time with Timezone withtout ActiveSupport or ENV['TZ']}
-  spec.description   = %q{Handle Time with Timezone withtout ActiveSupport or ENV['TZ']}
+  spec.summary       = %q{Handle time with zone withtout ActiveSupport or ENV['TZ']}
+  spec.description   = %q{Handle time with zone withtout ActiveSupport or ENV['TZ']}
   spec.homepage      = "https://github.com/sonots/time_with_zone"
   spec.license       = "MIT"
 

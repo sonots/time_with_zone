@@ -1,6 +1,6 @@
 # TimeWithZone
 
-Handle Time with Timezone without ActiveSupport or `ENV['TZ']` for thread-safety.
+Handle time with zone without ActiveSupport or `ENV['TZ']` for thread-safety.
 
 ## Installation
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-See [docs](https://sonots.github.io/time_with_zone/frames.html)
+See [docs](https://sonots.github.io/time_with_zone/TimeWithZone.html)
 
 ## Development
 

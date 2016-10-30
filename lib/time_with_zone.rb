@@ -2,6 +2,23 @@ require_relative 'time_with_zone/version'
 require 'time'
 require 'tzinfo'
 
+# Handle time with zone withtout ActiveSupport or ENV\['TZ'\]
+#
+#     require 'time_with_zone'
+#
+#     TimeWithZone.strptime_with_zone('2016-10-10', '%Y-%m-%d', 'Asia/Taipei')
+#     # => '2016-10-10 00:00:00 +0800'
+#
+#     TimeWithZone.parse_with_zone('2016-10-10', 'Asia/Taipei')
+#     # => '2016-10-10 00:00:00 +0800'
+#
+#     time = Time.parse('2016-10-10 00:00:00 +00:00')
+#     TimeWithZone.set_zone!(time, 'Asia/Taipei')
+#     # => '2016-10-10 00:00:00 +0800'
+#
+#     time = Time.parse('2016-10-10 00:00:00 +00:00')
+#     TimeWithZone.localtime_with_zone(time, 'Asia/Taipei')
+#     # => '2016-10-10 08:00:00 +0800'
 class TimeWithZone
   # [+-]HH:MM, [+-]HHMM, [+-]HH
   NUMERIC_PATTERN = %r{\A[+-]\d\d(:?\d\d)?\z}
