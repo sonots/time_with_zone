@@ -12,6 +12,48 @@ class TimeWithZone
   # Short-abbreviation timezone which Ruby's Time class supports
   ZoneOffset = (class << Time; self; end)::ZoneOffset
 
+  # Time#localtime with timezone
+  #
+  # This method does not change timezone of time object destructively
+  #
+  # @see localtime_with_zone!
+  def self.localtime_with_zone(time, timezone)
+    localtime_with_zone!(time.dup, timezone)
+  end
+
+  # Time#localtime with timezone
+  #
+  # This method changes timezone of time object destructively
+  #
+  #      ENV['TZ'] = '+09:00' # Assume your local timezone is +09:00
+  #
+  #      require 'time'
+  #
+  #      time = Time.parse("2016-10-20 00:00:00 +00:00") 
+  #      time.dup.localtime("+08:00")
+  #      #=> 2010-10-20 08:00:00 +0800
+  #      time.dump.localtime("CDT")
+  #      #=> error
+  #      time.dump.localtime("Asia/Taipei")
+  #      #=> error
+  #
+  #      require 'time_with_zone'
+  #
+  #      time = Time.parse("2016-10-20 00:00:00 +00:00") 
+  #      TimeWithZone.localtime_with_zone(time, "+08:00")
+  #      #=> 2010-10-20 08:00:00 +0800
+  #      TimeWithZone.localtime_with_zone(time, "CDT")
+  #      #=> 2016-10-19 19:00:00 -0500
+  #      TimeWithZone.localtime_with_zone(time, "Asia/Taipei")
+  #      #=> 2010-10-20 08:00:00 +0800
+  #
+  # @param [String] date string to be parsed
+  # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
+  def self.localtime_with_zone!(time, timezone)
+    _zone_offset = zone_offset(timezone, time)
+    time.localtime(_zone_offset)
+  end
+
   # Time.parse with timezone
   #
   #      ENV['TZ'] = '+09:00' # Assume your local timezone is +09:00
@@ -77,12 +119,16 @@ class TimeWithZone
 
   # This method simply overwrites the zone field of Time object
   #
+  # This method does not change timezone of time object destructively
+  #
   # @see overwrite_zone!
   def self.overwrite_zone(time, timezone)
     overwrite_zone!(time.dup, timezone)
   end
 
-  # This method simply overwrites the zone field of Time object destructively
+  # This method simply overwrites the zone field of Time object
+  #
+  # This method changes timezone of time object destructively
   #
   #     require 'time_with_zone'
   #

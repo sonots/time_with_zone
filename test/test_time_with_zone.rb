@@ -13,8 +13,8 @@ class TestTimeWithZone < Test::Unit::TestCase
       assert { TimeWithZone.zone_offset("UTC") == 0 }
       assert { TimeWithZone.zone_offset("Asia/Taipei") == 28800 }
       assert { TimeWithZone.zone_offset("America/Los_Angeles") == -25200 } # DST
-      assert { TimeWithZone.zone_offset("America/Los_Angeles", Time.parse("2016-07-07 +00:00")) == -25200 } # DST
-      assert { TimeWithZone.zone_offset("America/Los_Angeles", Time.parse("2016-01-01 +00:00")) == -28800 }
+      assert { TimeWithZone.zone_offset("America/Los_Angeles", Time.parse("2016-07-07 00:00:00 +00:00")) == -25200 } # DST
+      assert { TimeWithZone.zone_offset("America/Los_Angeles", Time.parse("2016-01-01 00:00:00 +00:00")) == -28800 }
     end
 
     def test_zone_offset_with_short_abbreviation
@@ -25,7 +25,7 @@ class TestTimeWithZone < Test::Unit::TestCase
   end
 
   def test_overwrite_zone
-    time = Time.parse("2016-07-07 +00:00") 
+    time = Time.parse("2016-07-07 00:00:00 +00:00")
     assert { TimeWithZone.overwrite_zone(time, "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
     assert { TimeWithZone.overwrite_zone(time, "PST").to_s == "2016-07-07 00:00:00 -0800" }
     assert { TimeWithZone.overwrite_zone(time, "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
@@ -44,5 +44,11 @@ class TestTimeWithZone < Test::Unit::TestCase
     assert { TimeWithZone.parse_with_zone("2016-07-07", "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
   end
 
+  def test_localtime_with_zone
+    time = Time.parse("2016-07-07 00:00:00 +00:00")
+    assert { TimeWithZone.localtime_with_zone(time, "-08:00").to_s == "2016-07-06 16:00:00 -0800" }
+    assert { TimeWithZone.localtime_with_zone(time, "PST").to_s == "2016-07-06 16:00:00 -0800" }
+    assert { TimeWithZone.localtime_with_zone(time, "America/Los_Angeles").to_s == "2016-07-06 17:00:00 -0700" }
+  end
 end
 
