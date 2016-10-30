@@ -40,9 +40,9 @@ class TimeWithZone
   #      time = Time.parse("2016-10-20 00:00:00 +00:00") 
   #      time.dup.localtime("+08:00")
   #      #=> 2010-10-20 08:00:00 +0800
-  #      time.dump.localtime("CDT")
+  #      time.dup.localtime("CDT")
   #      #=> error
-  #      time.dump.localtime("Asia/Taipei")
+  #      time.dup.localtime("Asia/Taipei")
   #      #=> error
   #
   #      require 'time_with_zone'
