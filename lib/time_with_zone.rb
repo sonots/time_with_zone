@@ -83,7 +83,7 @@ class TimeWithZone
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
   def self.parse_with_zone(date, timezone)
     time = Time.parse(date)
-    overwrite_zone!(time, timezone)
+    set_zone!(time, timezone)
   end
 
   # Time.strptime with timezone
@@ -115,29 +115,31 @@ class TimeWithZone
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
   def self.strptime_with_zone(date, format, timezone)
     time = Time.strptime(date, format)
-    overwrite_zone!(time, timezone)
+    set_zone!(time, timezone)
   end
 
-  # This method simply overwrites the zone field of Time object (non-destructive)
+  # This method simply sets the zone field of Time object (non-destructive)
   #
   #     require 'time_with_zone'
   #
-  #     TimeWithZone.overwrite_zone!(Time.parse("2010-02-02 +09:00"), "+08:00")
-  #     #=> "2010-02-02 00:00:00 +08:00" (Note that not "2010-02-01 23:00:00 +08:00")
+  #     time = Time.parse("2016-02-02 00:00:00 +00:00")
+  #     TimeWithZone.set_zone(time, "+08:00")
+  #     #=> "2016-02-02 00:00:00 +0800"
+  #     # Note that it is not "2016-02-02 08:00:00 +0800" like Time#localtime(timezone)
   #
   # @param [Time] time
   # @param [String] timezone
   # @return [Time]
-  def self.overwrite_zone(time, timezone)
-    overwrite_zone!(time.dup, timezone)
+  def self.set_zone(time, timezone)
+    set_zone!(time.dup, timezone)
   end
 
-  # This method simply overwrites the zone field of Time object (destructive)
+  # This method simply sets the zone field of Time object (destructive)
   #
   # @param [Time] time
   # @param [String] timezone
-  # @see overwrite_zone
-  def self.overwrite_zone!(time, timezone)
+  # @see set_zone
+  def self.set_zone!(time, timezone)
     _utc_offset = time.utc_offset
     _zone_offset = zone_offset(timezone, time)
     time.localtime(_zone_offset) + _utc_offset - _zone_offset

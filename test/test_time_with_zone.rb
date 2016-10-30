@@ -24,11 +24,11 @@ class TestTimeWithZone < Test::Unit::TestCase
     end
   end
 
-  def test_overwrite_zone
+  def test_set_zone
     time = Time.parse("2016-07-07 00:00:00 +00:00")
-    assert { TimeWithZone.overwrite_zone(time, "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
-    assert { TimeWithZone.overwrite_zone(time, "PST").to_s == "2016-07-07 00:00:00 -0800" }
-    assert { TimeWithZone.overwrite_zone(time, "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
+    assert { TimeWithZone.set_zone(time, "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.set_zone(time, "PST").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.set_zone(time, "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
   end
 
   def test_strptime_with_zone
