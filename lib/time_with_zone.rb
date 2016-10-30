@@ -10,20 +10,11 @@ class TimeWithZone
   NAME_PATTERN = %r{\A[^/]+/[^/]+(/[^/]+)?\z}
 
   # Short-abbreviation timezone which Ruby's Time class supports
+  #
+  # @see https://github.com/ruby/ruby/blob/6ce158ba870eb815ba9775ac8380b32fd81be040/lib/time.rb#L97-L113
   ZoneOffset = (class << Time; self; end)::ZoneOffset
 
-  # Time#localtime with timezone
-  #
-  # This method does not change timezone of time object destructively
-  #
-  # @see localtime_with_zone!
-  def self.localtime_with_zone(time, timezone)
-    localtime_with_zone!(time.dup, timezone)
-  end
-
-  # Time#localtime with timezone
-  #
-  # This method changes timezone of time object destructively
+  # Time#localtime with timezone (non-destructive)
   #
   #      ENV['TZ'] = '+09:00' # Assume your local timezone is +09:00
   #
@@ -47,8 +38,18 @@ class TimeWithZone
   #      TimeWithZone.localtime_with_zone(time, "Asia/Taipei")
   #      #=> 2010-10-20 08:00:00 +0800
   #
-  # @param [String] date string to be parsed
+  # @param [Time] time object
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
+  # @param [Time]
+  def self.localtime_with_zone(time, timezone)
+    localtime_with_zone!(time.dup, timezone)
+  end
+
+  # Time#localtime with timezone (destructive)
+  #
+  # @param [Time] time object
+  # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
+  # @see localtime_with_zone
   def self.localtime_with_zone!(time, timezone)
     _zone_offset = zone_offset(timezone, time)
     time.localtime(_zone_offset)
@@ -117,18 +118,7 @@ class TimeWithZone
     overwrite_zone!(time, timezone)
   end
 
-  # This method simply overwrites the zone field of Time object
-  #
-  # This method does not change timezone of time object destructively
-  #
-  # @see overwrite_zone!
-  def self.overwrite_zone(time, timezone)
-    overwrite_zone!(time.dup, timezone)
-  end
-
-  # This method simply overwrites the zone field of Time object
-  #
-  # This method changes timezone of time object destructively
+  # This method simply overwrites the zone field of Time object (non-destructive)
   #
   #     require 'time_with_zone'
   #
@@ -138,6 +128,15 @@ class TimeWithZone
   # @param [Time] time
   # @param [String] timezone
   # @return [Time]
+  def self.overwrite_zone(time, timezone)
+    overwrite_zone!(time.dup, timezone)
+  end
+
+  # This method simply overwrites the zone field of Time object (destructive)
+  #
+  # @param [Time] time
+  # @param [String] timezone
+  # @see overwrite_zone
   def self.overwrite_zone!(time, timezone)
     _utc_offset = time.utc_offset
     _zone_offset = zone_offset(timezone, time)
@@ -145,6 +144,21 @@ class TimeWithZone
   end
 
   # Returns zone offset for given timezone string
+  #
+  #     require 'time_with_zone'
+  #
+  #     TimeWithZone.zone_offset("+08:00")
+  #     #=> 28800
+  #     TimeWithZone.zone_offset("Asia/Taipei")
+  #     #=> 28800
+  #     TimeWithZone.zone_offset("PST")
+  #     #=> -28800
+  #     TimeWithZone.zone_offset("America/Los_Angeles")
+  #     #=> -25200 
+  #     TimeWithZone.zone_offset("America/Los_Angeles", Time.parse("2016-07-07 00:00:00 +00:00"))
+  #     #=> -25200 # DST (Daylight Saving Time)
+  #     TimeWithZone.zone_offset("America/Los_Angeles", Time.parse("2016-01-01 00:00:00 +00:00"))
+  #     #=> -28800 # non DST
   #
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
   # @param [Time] time if you need to consider Daylight Saving Time
