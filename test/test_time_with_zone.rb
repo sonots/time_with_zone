@@ -24,22 +24,25 @@ class TestTimeWithZone < Test::Unit::TestCase
     end
   end
 
-  sub_test_case "overwrite_zone" do
-    def test_overwrite_zone
-      time = Time.parse("2016-07-07 +00:00") 
-      assert { TimeWithZone.overwrite_zone(time, "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
-      assert { TimeWithZone.overwrite_zone(time, "PST").to_s == "2016-07-07 00:00:00 -0800" }
-      assert { TimeWithZone.overwrite_zone(time, "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
-    end
+  def test_overwrite_zone
+    time = Time.parse("2016-07-07 +00:00") 
+    assert { TimeWithZone.overwrite_zone(time, "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.overwrite_zone(time, "PST").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.overwrite_zone(time, "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
   end
 
-  sub_test_case "strptime_with_zone" do
-    def test_strptime_with_zone
-      time = Time.parse("2016-07-07 +00:00") 
-      assert { TimeWithZone.strptime_with_zone("2016-07-07", "%Y-%m-%d", "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
-      assert { TimeWithZone.strptime_with_zone("2016-07-07", "%Y-%m-%d", "PST").to_s == "2016-07-07 00:00:00 -0800" }
-      assert { TimeWithZone.strptime_with_zone("2016-07-07", "%Y-%m-%d", "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
-    end
+  def test_strptime_with_zone
+    assert { TimeWithZone.strptime_with_zone("2016-07-07", "%Y-%m-%d", "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.strptime_with_zone("2016-07-07", "%Y-%m-%d", "PST").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.strptime_with_zone("2016-07-07", "%Y-%m-%d", "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
+  end
+
+  def test_parse_with_zone
+    time = Time.parse("2016-07-07 +00:00") 
+    assert { TimeWithZone.parse_with_zone("2016-07-07", "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.parse_with_zone("2016-07-07", "PST").to_s == "2016-07-07 00:00:00 -0800" }
+    assert { TimeWithZone.parse_with_zone("2016-07-07", "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
   end
 
 end
+

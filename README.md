@@ -1,8 +1,6 @@
 # TimeWithZone
 
-Handle Time with Timezone without ActiveSupport or ENV['TZ'].
-
-This gem does not use ActiveSupport, and also does not use ENV['TZ'] because of thread-safety.
+Handle Time with Timezone without ActiveSupport or `ENV['TZ']` for thread-safety.
 
 ## Installation
 
@@ -38,7 +36,7 @@ TimeWithZone.srtptime_with_zone("2016-10-20", "%Y-%m-%d", "+08:00")
 
 ## Limitation
 
-This gem does not support short-abbreviation of timezone such as 'PST', 'CST', and 'JST' because some abbreviations are overlapped and we can not tell which is a representative example.
+This gem only partially supports short-abbreviation of timezone such as 'PST', 'CST', and 'JST' as ruby iteself only partially supports https://github.com/ruby/ruby/blob/6ce158ba870eb815ba9775ac8380b32fd81be040/lib/time.rb#L97-L113.
 
 ## Development
 

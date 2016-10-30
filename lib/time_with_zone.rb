@@ -12,7 +12,60 @@ class TimeWithZone
   # Short-abbreviation timezone which Ruby's Time class supports
   ZoneOffset = (class << Time; self; end)::ZoneOffset
 
-  # strptime with timezone
+  # Time.parse with timezone
+  #
+  #      ENV['TZ'] = '+09:00' # Assume your local timezone is +09:00
+  #
+  #      require 'time'
+  #
+  #      Time.parse("2016-10-20")
+  #      #=> 2016-10-20 00:00:00 +0900
+  #      Time.parse("2016-10-20 00:00:00 +08:00")
+  #      #=> 2016-10-20 00:00:00 +0800
+  #      Time.parse("2016-10-20 00:00:00 CDT")
+  #      #=> 2016-10-20 00:00:00 -0500
+  #      Time.parse("2016-10-20 00:00:00 Asia/Taipei")
+  #      #=> 2016-10-20 00:00:00 +0900 (does not work)
+  #
+  #      require 'time_with_zone'
+  #
+  #      TimeWithZone.parse_with_zone("2016-10-20", "+08:00")
+  #      #=> 2016-10-20 00:00:00 +0800
+  #      TimeWithZone.parse_with_zone("2016-10-20", "CDT")
+  #      #=> 2016-10-20 00:00:00 -0500
+  #      TimeWithZone.parse_with_zone("2016-10-20", "Asia/Taipei")
+  #      #=> 2016-10-20 00:00:00 +0800
+  #
+  # @param [String] date string to be parsed
+  # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
+  def self.parse_with_zone(date, timezone)
+    time = Time.parse(date)
+    overwrite_zone!(time, timezone)
+  end
+
+  # Time.strptime with timezone
+  #
+  #      ENV['TZ'] = '+09:00' # Assume your local timezone is +09:00
+  #
+  #      require 'time'
+  #
+  #      Time.strptime("2016-10-20", "%Y-%m-%d")
+  #      #=> 2016-10-20 00:00:00 +0900
+  #      Time.strptime("2016-10-20 +08:00", "%Y-%m-%d %z")
+  #      #=> 2016-10-20 00:00:00 +0800
+  #      Time.strptime("2016-10-20 CDT", "%Y-%m-%d %Z")
+  #      #=> 2016-10-20 00:00:00 -0500
+  #      Time.strptime("2016-10-20 Asia/Taipei", "%Y-%m-%d %Z")
+  #      #=> 2016-10-20 00:00:00 +0900 (does not work)
+  #
+  #      require 'time_with_zone'
+  #
+  #      TimeWithZone.strptime_with_zone("2016-10-20", "%Y-%m-%d", "+08:00")
+  #      #=> 2016-10-20 00:00:00 +0800
+  #      TimeWithZone.strptime_with_zone("2016-10-20", "%Y-%m-%d", "CDT")
+  #      #=> 2016-10-20 00:00:00 -0500
+  #      TimeWithZone.strptime_with_zone("2016-10-20", "%Y-%m-%d", "Asia/Taipei")
+  #      #=> 2016-10-20 00:00:00 +0800
   #
   # @param [String] date string to be parsed
   # @param [String] format
@@ -29,12 +82,12 @@ class TimeWithZone
     overwrite_zone!(time.dup, timezone)
   end
 
-  # This method simply overwrites the zone field of Time object
+  # This method simply overwrites the zone field of Time object destructively
   #
-  # <pre>
-  # TimeWithZone.overwrite_zone!(Time.parse("2010-02-02 +09:00"), "+08:00")
-  # #=> "2010-02-02 00:00:00 +08:00", not "2010-02-01 23:00:00 +08:00"
-  # </pre>
+  #     require 'time_with_zone'
+  #
+  #     TimeWithZone.overwrite_zone!(Time.parse("2010-02-02 +09:00"), "+08:00")
+  #     #=> "2010-02-02 00:00:00 +08:00" (Note that not "2010-02-01 23:00:00 +08:00")
   #
   # @param [Time] time
   # @param [String] timezone
