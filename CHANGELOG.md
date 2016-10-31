@@ -1,3 +1,9 @@
+# 0.3.1 (2016-10-31)
+
+Enhancements:
+
+* Add strptime_with_zone_offset and parse_with_zone_offset
+
 # 0.3.0 (2016-10-31)
 
 Changes:
