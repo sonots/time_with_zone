@@ -192,7 +192,7 @@
         <dt id="VERSION-constant" class="">VERSION =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.2.0</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.2.1</span><span class='tstring_end'>&quot;</span></span></pre></dd>
       
     </dl>
   
@@ -214,7 +214,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#localtime_with_zone-class_method" title="localtime_with_zone (class method)">+ (Object) <strong>localtime_with_zone</strong>(time, timezone) </a>
+      <a href="#localtime_with_zone-class_method" title="localtime_with_zone (class method)">+ (Time) <strong>localtime_with_zone</strong>(time, timezone) </a>
     
 
     
@@ -238,7 +238,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#localtime_with_zone%21-class_method" title="localtime_with_zone! (class method)">+ (Object) <strong>localtime_with_zone!</strong>(time, timezone) </a>
+      <a href="#localtime_with_zone%21-class_method" title="localtime_with_zone! (class method)">+ (Time) <strong>localtime_with_zone!</strong>(time, timezone) </a>
     
 
     
@@ -262,7 +262,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#parse_with_zone-class_method" title="parse_with_zone (class method)">+ (Object) <strong>parse_with_zone</strong>(date, timezone) </a>
+      <a href="#parse_with_zone-class_method" title="parse_with_zone (class method)">+ (Time) <strong>parse_with_zone</strong>(date, timezone) </a>
     
 
     
@@ -310,7 +310,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#set_zone%21-class_method" title="set_zone! (class method)">+ (Object) <strong>set_zone!</strong>(time, timezone) </a>
+      <a href="#set_zone%21-class_method" title="set_zone! (class method)">+ (Time) <strong>set_zone!</strong>(time, timezone) </a>
     
 
     
@@ -334,7 +334,56 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#strptime_with_zone-class_method" title="strptime_with_zone (class method)">+ (Object) <strong>strptime_with_zone</strong>(date, format, timezone) </a>
+      <a href="#set_zone_offset-class_method" title="set_zone_offset (class method)">+ (Time) <strong>set_zone_offset</strong>(time, zone_offset) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method simply sets the zone offset field of Time object
+(non-destructive).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_zone_offset%21-class_method" title="set_zone_offset! (class method)">+ (Time) <strong>set_zone_offset!</strong>(time, zone_offset) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method simply sets the zone offset field of Time object (destructive).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strptime_with_zone-class_method" title="strptime_with_zone (class method)">+ (Time) <strong>strptime_with_zone</strong>(date, format, timezone) </a>
     
 
     
@@ -391,7 +440,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="localtime_with_zone-class_method">
   
-    + (<tt>Object</tt>) <strong>localtime_with_zone</strong>(time, timezone) 
+    + (<tt>Time</tt>) <strong>localtime_with_zone</strong>(time, timezone) 
   
 
   
@@ -473,9 +522,12 @@
       
     </li>
   
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
     <li>
-      
-        <span class='name'></span>
       
       
         <span class='type'>(<tt>Time</tt>)</span>
@@ -485,7 +537,6 @@
     </li>
   
 </ul>
-
 
 </div><table class="source_code">
   <tr>
@@ -511,7 +562,7 @@
       <div class="method_details ">
   <h3 class="signature " id="localtime_with_zone!-class_method">
   
-    + (<tt>Object</tt>) <strong>localtime_with_zone!</strong>(time, timezone) 
+    + (<tt>Time</tt>) <strong>localtime_with_zone!</strong>(time, timezone) 
   
 
   
@@ -563,6 +614,19 @@
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -577,13 +641,13 @@
       <pre class="lines">
 
 
-78
 79
 80
-81</pre>
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_localtime_with_zone!'>localtime_with_zone!</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='comma'>,</span> <span class='id identifier rubyid_timezone'>timezone</span><span class='rparen'>)</span>
   <span class='id identifier rubyid__zone_offset'>_zone_offset</span> <span class='op'>=</span> <span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='lparen'>(</span><span class='id identifier rubyid_timezone'>timezone</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
@@ -597,7 +661,7 @@
       <div class="method_details ">
   <h3 class="signature " id="parse_with_zone-class_method">
   
-    + (<tt>Object</tt>) <strong>parse_with_zone</strong>(date, timezone) 
+    + (<tt>Time</tt>) <strong>parse_with_zone</strong>(date, timezone) 
   
 
   
@@ -672,6 +736,19 @@
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -679,13 +756,13 @@
       <pre class="lines">
 
 
-109
-110
 111
-112</pre>
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse_with_zone'>parse_with_zone</span><span class='lparen'>(</span><span class='id identifier rubyid_date'>date</span><span class='comma'>,</span> <span class='id identifier rubyid_timezone'>timezone</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_time'>time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_date'>date</span><span class='rparen'>)</span>
@@ -769,12 +846,12 @@
       <pre class="lines">
 
 
-158
-159
-160</pre>
+161
+162
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 158</span>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_zone'>set_zone</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='comma'>,</span> <span class='id identifier rubyid_timezone'>timezone</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_set_zone!'>set_zone!</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> <span class='id identifier rubyid_timezone'>timezone</span><span class='rparen'>)</span>
@@ -787,7 +864,7 @@
       <div class="method_details ">
   <h3 class="signature " id="set_zone!-class_method">
   
-    + (<tt>Object</tt>) <strong>set_zone!</strong>(time, timezone) 
+    + (<tt>Time</tt>) <strong>set_zone!</strong>(time, timezone) 
   
 
   
@@ -829,6 +906,19 @@
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
   <p class="tag_title">See Also:</p>
   <ul class="see">
@@ -843,19 +933,193 @@
       <pre class="lines">
 
 
-167
-168
-169
-170
-171</pre>
+171
+172
+173</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 167</span>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_zone!'>set_zone!</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='comma'>,</span> <span class='id identifier rubyid_timezone'>timezone</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid__utc_offset'>_utc_offset</span> <span class='op'>=</span> <span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_utc_offset'>utc_offset</span>
-  <span class='id identifier rubyid__zone_offset'>_zone_offset</span> <span class='op'>=</span> <span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='lparen'>(</span><span class='id identifier rubyid_timezone'>timezone</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_localtime'>localtime</span><span class='lparen'>(</span><span class='id identifier rubyid__zone_offset'>_zone_offset</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid__utc_offset'>_utc_offset</span> <span class='op'>-</span> <span class='id identifier rubyid__zone_offset'>_zone_offset</span>
+  <span class='id identifier rubyid_set_zone_offset!'>set_zone_offset!</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='comma'>,</span> <span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='lparen'>(</span><span class='id identifier rubyid_timezone'>timezone</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_zone_offset-class_method">
+  
+    + (<tt>Time</tt>) <strong>set_zone_offset</strong>(time, zone_offset) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method simply sets the zone offset field of Time object
+(non-destructive)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>time_with_zone</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_time'>time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>2016-02-02 00:00:00 +00:00</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='const'>TimeWithZone</span><span class='period'>.</span><span class='id identifier rubyid_set_zone_offset'>set_zone_offset</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='comma'>,</span> <span class='int'>28800</span><span class='rparen'>)</span>
+<span class='comment'>#=&gt; &quot;2016-02-02 00:00:00 +0800&quot;
+</span><span class='comment'># Note that it is not &quot;2016-02-02 08:00:00 +0800&quot; like Time#localtime(zone_offset)
+</span></code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>zone_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+187
+188
+189</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 187</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_zone_offset'>set_zone_offset</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='comma'>,</span> <span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_set_zone_offset!'>set_zone_offset!</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='comma'>,</span> <span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_zone_offset!-class_method">
+  
+    + (<tt>Time</tt>) <strong>set_zone_offset!</strong>(time, zone_offset) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method simply sets the zone offset field of Time object (destructive)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>time</span>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>zone_offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#set_zone_offset-class_method" title="TimeWithZone.set_zone_offset (method)">set_zone_offset</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197
+198
+199
+200</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 197</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_zone_offset!'>set_zone_offset!</span><span class='lparen'>(</span><span class='id identifier rubyid_time'>time</span><span class='comma'>,</span> <span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_utc_offset'>utc_offset</span> <span class='op'>=</span> <span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_utc_offset'>utc_offset</span>
+  <span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_localtime'>localtime</span><span class='lparen'>(</span><span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='id identifier rubyid_utc_offset'>utc_offset</span> <span class='op'>-</span> <span class='id identifier rubyid_zone_offset'>zone_offset</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -865,7 +1129,7 @@
       <div class="method_details ">
   <h3 class="signature " id="strptime_with_zone-class_method">
   
-    + (<tt>Object</tt>) <strong>strptime_with_zone</strong>(date, format, timezone) 
+    + (<tt>Time</tt>) <strong>strptime_with_zone</strong>(date, format, timezone) 
   
 
   
@@ -951,6 +1215,19 @@
   
 </ul>
 
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Time</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -958,13 +1235,13 @@
       <pre class="lines">
 
 
-141
-142
-143
-144</pre>
+144
+145
+146
+147</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 141</span>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_strptime_with_zone'>strptime_with_zone</span><span class='lparen'>(</span><span class='id identifier rubyid_date'>date</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span><span class='comma'>,</span> <span class='id identifier rubyid_timezone'>timezone</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_time'>time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_strptime'>strptime</span><span class='lparen'>(</span><span class='id identifier rubyid_date'>date</span><span class='comma'>,</span> <span class='id identifier rubyid_format'>format</span><span class='rparen'>)</span>
@@ -1073,25 +1350,25 @@
       <pre class="lines">
 
 
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208</pre>
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/time_with_zone.rb', line 222</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='lparen'>(</span><span class='id identifier rubyid_timezone'>timezone</span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='const'>NUMERIC_PATTERN</span> <span class='op'>===</span> <span class='id identifier rubyid_timezone'>timezone</span>
@@ -1119,7 +1396,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Oct 31 12:59:31 2016 by
+  Generated on Mon Oct 31 14:31:38 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>

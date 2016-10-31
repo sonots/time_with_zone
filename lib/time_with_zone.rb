@@ -65,7 +65,7 @@ class TimeWithZone
   #
   # @param [Time] time object
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
-  # @param [Time]
+  # @return [Time]
   def self.localtime_with_zone(time, timezone)
     localtime_with_zone!(time.dup, timezone)
   end
@@ -74,6 +74,7 @@ class TimeWithZone
   #
   # @param [Time] time object
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
+  # @return [Time]
   # @see localtime_with_zone
   def self.localtime_with_zone!(time, timezone)
     _zone_offset = zone_offset(timezone, time)
@@ -106,6 +107,7 @@ class TimeWithZone
   #
   # @param [String] date string to be parsed
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
+  # @return [Time]
   def self.parse_with_zone(date, timezone)
     time = Time.parse(date)
     set_zone!(time, timezone)
@@ -138,6 +140,7 @@ class TimeWithZone
   # @param [String] date string to be parsed
   # @param [String] format
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
+  # @return [Time]
   def self.strptime_with_zone(date, format, timezone)
     time = Time.strptime(date, format)
     set_zone!(time, timezone)
@@ -163,6 +166,7 @@ class TimeWithZone
   #
   # @param [Time] time
   # @param [String] timezone
+  # @return [Time]
   # @see set_zone
   def self.set_zone!(time, timezone)
     set_zone_offset!(time, zone_offset(timezone, time))
@@ -188,6 +192,7 @@ class TimeWithZone
   #
   # @param [Time] time
   # @param [Integer] zone_offset
+  # @return [Time]
   # @see set_zone_offset
   def self.set_zone_offset!(time, zone_offset)
     utc_offset = time.utc_offset
