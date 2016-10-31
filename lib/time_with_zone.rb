@@ -60,7 +60,7 @@ class TimeWithZone
   #      require 'time_with_zone'
   #      time = Time.parse("2016-10-20 00:00:00 +00:00")
   #
-  #      time.dup.localtime(TimeWithZone.zone_offset("Asia/Taipei"))
+  #      time.dup.localtime(TimeWithZone.zone_offset("Asia/Taipei", time))
   #      #=> 2010-10-20 08:00:00 +0800
   #
   # @param [Time] time object

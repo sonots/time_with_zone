@@ -192,7 +192,7 @@
         <dt id="VERSION-constant" class="">VERSION =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.2.1</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.3.0</span><span class='tstring_end'>&quot;</span></span></pre></dd>
       
     </dl>
   
@@ -430,7 +430,7 @@
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>time_with_zone</span><span class='tstring_end'>&#39;</span></span>
 <span class='id identifier rubyid_time'>time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>2016-10-20 00:00:00 +00:00</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 
-<span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_localtime'>localtime</span><span class='lparen'>(</span><span class='const'>TimeWithZone</span><span class='period'>.</span><span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Asia/Taipei</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_time'>time</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span><span class='period'>.</span><span class='id identifier rubyid_localtime'>localtime</span><span class='lparen'>(</span><span class='const'>TimeWithZone</span><span class='period'>.</span><span class='id identifier rubyid_zone_offset'>zone_offset</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Asia/Taipei</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_time'>time</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='comment'>#=&gt; 2010-10-20 08:00:00 +0800
 </span></code></pre>
 
@@ -1170,7 +1170,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Oct 31 19:57:03 2016 by
+  Generated on Mon Oct 31 20:01:31 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>
