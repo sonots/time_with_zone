@@ -13,7 +13,7 @@ require 'tzinfo'
 #     # => '2016-10-10 00:00:00 +0800'
 #
 #     time = Time.parse('2016-10-10 00:00:00 +00:00')
-#     TimeWithZone.set_zone!(time, 'Asia/Taipei')
+#     TimeWithZone.set_zone(time, 'Asia/Taipei')
 #     # => '2016-10-10 00:00:00 +0800'
 #
 #     time = Time.parse('2016-10-10 00:00:00 +00:00')
@@ -146,7 +146,7 @@ class TimeWithZone
     set_zone!(time, timezone)
   end
 
-  # This method simply sets the zone field of Time object (non-destructive)
+  # This method simply sets the zone field of Time object
   #
   #     require 'time_with_zone'
   #
@@ -162,17 +162,7 @@ class TimeWithZone
     set_zone!(time.dup, timezone)
   end
 
-  # This method simply sets the zone field of Time object (destructive)
-  #
-  # @param [Time] time
-  # @param [String] timezone
-  # @return [Time]
-  # @see set_zone
-  def self.set_zone!(time, timezone)
-    set_zone_offset!(time, zone_offset(timezone, time))
-  end
-
-  # This method simply sets the zone offset field of Time object (non-destructive)
+  # This method simply sets the zone offset field of Time object
   #
   #     require 'time_with_zone'
   #     time = Time.parse("2016-02-02 00:00:00 +00:00")
@@ -186,17 +176,6 @@ class TimeWithZone
   # @return [Time]
   def self.set_zone_offset(time, zone_offset)
     set_zone_offset!(time.dup, zone_offset)
-  end
-
-  # This method simply sets the zone offset field of Time object (destructive)
-  #
-  # @param [Time] time
-  # @param [Integer] zone_offset
-  # @return [Time]
-  # @see set_zone_offset
-  def self.set_zone_offset!(time, zone_offset)
-    utc_offset = time.utc_offset
-    time.localtime(zone_offset) + utc_offset - zone_offset
   end
 
   # Returns zone offset for given timezone string
@@ -234,5 +213,30 @@ class TimeWithZone
     else
       raise ArgumentError, "timezone format is invalid: #{timezone}"
     end
+  end
+
+  private
+
+  # This method simply sets the zone field of Time object
+  #
+  # @param [Time] time
+  # @param [String] timezone
+  # @return [Time]
+  # @see set_zone
+  # @todo how to modify time object destructively?
+  def self.set_zone!(time, timezone)
+    set_zone_offset!(time, zone_offset(timezone, time))
+  end
+
+  # This method simply sets the zone offset field of Time object
+  #
+  # @param [Time] time
+  # @param [Integer] zone_offset
+  # @return [Time]
+  # @see set_zone_offset
+  # @todo how to modify time object destructively?
+  def self.set_zone_offset!(time, zone_offset)
+    utc_offset = time.utc_offset
+    time.localtime(zone_offset) + utc_offset - zone_offset
   end
 end
