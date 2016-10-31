@@ -1,6 +1,6 @@
 # TimeWithZone
 
-Handle time with zone without ActiveSupport or `ENV['TZ']` for thread-safety.
+Handle time with zone without ActiveSupport, or `ENV['TZ']` for thread-safety.
 
 ## Installation
 
@@ -20,7 +20,51 @@ Or install it yourself as:
 
 ## Usage
 
-See [docs](https://sonots.github.io/time_with_zone/TimeWithZone.html)
+Assume your localtime zone is `+09:00` (`Asia/Tokyo`):
+
+```ruby
+require 'time'
+
+Time.strptime('2015-01-01', '%Y-%m-%d')
+#=> 2015-01-01 00:00:00 +0900
+```
+
+But, you want to get time in `+08:00` (`Asia/Taipei`) as `2015-01-01 00:00:00 +0800`.
+
+If the timezone format is in numeric formats such as `[+-]HH:MM`, `[+-]HHMM`, `[+-]HH`, you may use `%z` of strptime:
+
+```ruby
+require 'time'
+
+date = '2015-01-01'
+timezone = '+08:00'
+Time.strptime("#{date} #{timezone}", '%Y-%m-%d %z')
+#=> 2015-01-01 00:00:00 +0800
+```
+
+However, if the timezone format is in the `Region/Zone` format such as `Asia/Taipei`, `%Z` or `%z` won't work. So, use `time_with_zone` gem as:
+
+
+```ruby
+require 'time_with_zone'
+
+TimeWithZone.strptime_with_zone('2015-01-01', '%Y-%m-%d', 'Asia/Taipei')
+#=> 2015-01-01 00:00:00 +0800
+```
+
+TimeWithZone gem accepts numeric formats, and the `Region/Zone` format, and some of short-abbreviations of timezone such as UTC.
+
+## Documents
+
+Available methods are:
+
+  * strptime_with_zone(str, format, timezone)
+  * parse_with_zone(str, timezone)
+  * zone_offset(timezone, time = nil)
+  * set_zone(time, timezone)
+  * set_zone_offset(time, zone_offset)
+
+See [docs](https://sonots.github.io/time_with_zone/TimeWithZone.html) for details
 
 ## Development
 
