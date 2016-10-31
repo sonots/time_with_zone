@@ -60,8 +60,10 @@ Available methods are:
 
   * strptime_with_zone(str, format, timezone)
   * parse_with_zone(str, timezone)
-  * zone_offset(timezone, time = nil)
   * set_zone(time, timezone)
+  * zone_offset(timezone, time = nil)
+  * strptime_with_zone_offset(str, format, zone_offset)
+  * parse_with_zone_offset(str, zone_offset)
   * set_zone_offset(time, zone_offset)
 
 See [docs](https://sonots.github.io/time_with_zone/TimeWithZone.html) for details

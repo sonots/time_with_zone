@@ -42,11 +42,20 @@ class TestTimeWithZone < Test::Unit::TestCase
     assert { TimeWithZone.strptime_with_zone("2016-07-07", "%Y-%m-%d", "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
   end
 
+  def test_strptime_with_zone_offset
+    assert { TimeWithZone.strptime_with_zone_offset("2016-07-07", "%Y-%m-%d", -28800).to_s == "2016-07-07 00:00:00 -0800" }
+  end
+
   def test_parse_with_zone
     time = Time.parse("2016-07-07 +00:00") 
     assert { TimeWithZone.parse_with_zone("2016-07-07", "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
     assert { TimeWithZone.parse_with_zone("2016-07-07", "PST").to_s == "2016-07-07 00:00:00 -0800" }
     assert { TimeWithZone.parse_with_zone("2016-07-07", "America/Los_Angeles").to_s == "2016-07-07 00:00:00 -0700" }
+  end
+
+  def test_parse_with_zone_offset
+    time = Time.parse("2016-07-07 +00:00") 
+    assert { TimeWithZone.parse_with_zone_offset("2016-07-07", -28800).to_s == "2016-07-07 00:00:00 -0800" }
   end
 
   def test_localtime_with_zone

@@ -113,6 +113,22 @@ class TimeWithZone
     set_zone!(time, timezone)
   end
 
+  # Time.parse with zone_offset
+  #
+  #      require 'time_with_zone'
+  #
+  #      TimeWithZone.parse_with_zone_offset("2016-10-20", 28800)
+  #      #=> 2016-10-20 00:00:00 +0800
+  #
+  # @param [String] date string to be parsed
+  # @param [Integer] zone_offset
+  # @return [Time]
+  def self.parse_with_zone_offset(date, zone_offset)
+    time = Time.parse(date)
+    set_zone_offset!(time, zone_offset)
+  end
+
+
   # Time.strptime with timezone
   #
   #      ENV['TZ'] = '+09:00' # Assume your local timezone is +09:00
@@ -144,6 +160,22 @@ class TimeWithZone
   def self.strptime_with_zone(date, format, timezone)
     time = Time.strptime(date, format)
     set_zone!(time, timezone)
+  end
+
+  # Time.strptime with zone_offset
+  #
+  #      require 'time_with_zone'
+  #
+  #      TimeWithZone.strptime_with_zone_offset("2016-10-20", "%Y-%m-%d", 28800)
+  #      #=> 2016-10-20 00:00:00 +0800
+  #
+  # @param [String] date string to be parsed
+  # @param [String] format
+  # @param [Integer] zone_offset
+  # @return [Time]
+  def self.strptime_with_zone_offset(date, format, zone_offset)
+    time = Time.strptime(date, format)
+    set_zone_offset!(time, zone_offset)
   end
 
   # This method changes only the zone field of Time object
