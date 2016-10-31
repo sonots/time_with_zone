@@ -146,7 +146,7 @@ class TimeWithZone
     set_zone!(time, timezone)
   end
 
-  # This method simply sets the zone field of Time object
+  # This method changes only the zone field of Time object
   #
   #     require 'time_with_zone'
   #
@@ -162,7 +162,7 @@ class TimeWithZone
     set_zone!(time.dup, timezone)
   end
 
-  # This method simply sets the zone offset field of Time object
+  # This method changes only the zone offset field of Time object
   #
   #     require 'time_with_zone'
   #     time = Time.parse("2016-02-02 00:00:00 +00:00")
@@ -217,7 +217,7 @@ class TimeWithZone
 
   private
 
-  # This method simply sets the zone field of Time object
+  # This method changes only the zone field of Time object
   #
   # @param [Time] time
   # @param [String] timezone
@@ -228,7 +228,7 @@ class TimeWithZone
     set_zone_offset!(time, zone_offset(timezone, time))
   end
 
-  # This method simply sets the zone offset field of Time object
+  # This method changes only the zone offset field of Time object
   #
   # @param [Time] time
   # @param [Integer] zone_offset
