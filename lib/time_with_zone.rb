@@ -55,6 +55,14 @@ class TimeWithZone
   #      TimeWithZone.localtime_with_zone(time, "Asia/Taipei")
   #      #=> 2010-10-20 08:00:00 +0800
   #
+  # This method is actually a short-hand of
+  #
+  #      require 'time_with_zone'
+  #      time = Time.parse("2016-10-20 00:00:00 +00:00")
+  #
+  #      time.dup.localtime(TimeWithZone.zone_offset("Asia/Taipei"))
+  #      #=> 2010-10-20 08:00:00 +0800
+  #
   # @param [Time] time object
   # @param [String] timezone {NUMERIC_PATTERN} or {NAME_PATTERN} or {ZoneOffset}
   # @param [Time]
