@@ -165,9 +165,33 @@ class TimeWithZone
   # @param [String] timezone
   # @see set_zone
   def self.set_zone!(time, timezone)
-    _utc_offset = time.utc_offset
-    _zone_offset = zone_offset(timezone, time)
-    time.localtime(_zone_offset) + _utc_offset - _zone_offset
+    set_zone_offset!(time, zone_offset(timezone, time))
+  end
+
+  # This method simply sets the zone offset field of Time object (non-destructive)
+  #
+  #     require 'time_with_zone'
+  #     time = Time.parse("2016-02-02 00:00:00 +00:00")
+  #
+  #     TimeWithZone.set_zone_offset(time, 28800)
+  #     #=> "2016-02-02 00:00:00 +0800"
+  #     # Note that it is not "2016-02-02 08:00:00 +0800" like Time#localtime(zone_offset)
+  #
+  # @param [Time] time
+  # @param [Integer] zone_offset
+  # @return [Time]
+  def self.set_zone_offset(time, zone_offset)
+    set_zone_offset!(time.dup, zone_offset)
+  end
+
+  # This method simply sets the zone offset field of Time object (destructive)
+  #
+  # @param [Time] time
+  # @param [Integer] zone_offset
+  # @see set_zone_offset
+  def self.set_zone_offset!(time, zone_offset)
+    utc_offset = time.utc_offset
+    time.localtime(zone_offset) + utc_offset - zone_offset
   end
 
   # Returns zone offset for given timezone string

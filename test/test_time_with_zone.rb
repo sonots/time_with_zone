@@ -24,6 +24,11 @@ class TestTimeWithZone < Test::Unit::TestCase
     end
   end
 
+  def test_set_zone_offset
+    time = Time.parse("2016-07-07 00:00:00 +00:00")
+    assert { TimeWithZone.set_zone_offset(time, -28800).to_s == "2016-07-07 00:00:00 -0800" }
+  end
+
   def test_set_zone
     time = Time.parse("2016-07-07 00:00:00 +00:00")
     assert { TimeWithZone.set_zone(time, "-08:00").to_s == "2016-07-07 00:00:00 -0800" }
